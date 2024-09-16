@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="text-center">
+    <h2 class="mb-4 animate__animated animate__fadeInDown">Hesaplama Sonucu</h2>
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 animate__animated animate__fadeInLeft">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="card-title"><i class="fas fa-boxes mr-2"></i>Gereken Ürün Sayısı</h3>
+                    <p class="card-text display-4 text-primary mt-3">{{ num_products }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 mb-4">
+            <div class="card h-100 animate__animated animate__fadeInRight">
+                <div class="card-body d-flex flex-column justify-content-center">
+                    <h3 class="card-title"><i class="fas fa-warehouse mr-2"></i>Seçilen Konteyner</h3>
+                    <p class="card-text display-4 text-success mt-3">{{ container }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="{{ url_for('index') }}" class="btn btn-primary btn-lg animate__animated animate__bounceIn animate__delay-1s">
+        <i class="fas fa-calculator mr-2"></i>Yeni Hesaplama Yap
+    </a>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('mouseover', function() {
+                this.classList.add('animate__pulse');
+            });
+            card.addEventListener('mouseout', function() {
+                this.classList.remove('animate__pulse');
+            });
+        });
+    });
+</script>
+{% endblock %}

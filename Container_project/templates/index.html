@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<form method="POST" class="needs-validation" novalidate>
+    {{ form.hidden_tag() }}
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            {{ form.length.label(class="font-weight-bold") }}
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-arrows-alt-h"></i></span>
+                </div>
+                {{ form.length(class="form-control", placeholder="Uzunluk (cm)") }}
+            </div>
+            <div class="invalid-feedback">Lütfen ürün uzunluğunu girin.</div>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.width.label(class="font-weight-bold") }}
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-arrows-alt-v"></i></span>
+                </div>
+                {{ form.width(class="form-control", placeholder="Genişlik (cm)") }}
+            </div>
+            <div class="invalid-feedback">Lütfen ürün genişliğini girin.</div>
+        </div>
+        <div class="form-group col-md-4">
+            {{ form.height.label(class="font-weight-bold") }}
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-arrows-alt"></i></span>
+                </div>
+                {{ form.height(class="form-control", placeholder="Yükseklik (cm)") }}
+            </div>
+            <div class="invalid-feedback">Lütfen ürün yüksekliğini girin.</div>
+        </div>
+    </div>
+    <div class="form-group">
+        {{ form.container.label(class="font-weight-bold") }}
+        {{ form.container(class="form-control custom-select") }}
+    </div>
+    <div class="form-group text-center">
+        {{ form.submit(class="btn btn-primary btn-lg animate__animated animate__pulse animate__infinite") }}
+    </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script>
+(function() {
+    'use strict';
+    window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener('submit', function(event) {
+                if (form.checkValidity() === false) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                }
+                form.classList.add('was-validated');
+            }, false);
+        });
+    }, false);
+
+    // Add some interactivity
+    const inputs = document.querySelectorAll('input[type="number"]');
+    inputs.forEach(input => {
+        input.addEventListener('input', function() {
+            if (this.value) {
+                this.classList.add('is-valid');
+            } else {
+                this.classList.remove('is-valid');
+            }
+        });
+    });
+
+    const select = document.querySelector('select');
+    select.addEventListener('change', function() {
+        this.classList.add('is-valid');
+    });
+})();
+</script>
+{% endblock %}
